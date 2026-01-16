@@ -49,20 +49,54 @@ async function uploadAssetToHeyGen(fileBuffer, contentType) {
     return response.data;
 }
 
+
 /**
  * Create an Avatar IV video using HeyGen API
  * @param {string} imageKey - Image key from upload
  * @param {string} audioAssetId - Audio asset ID from upload
+ * @param {string} videoOrientation - Video orientation (landscape, portrait, square)
  * @returns {Promise<object>} - Response from HeyGen
  */
-async function createAvatarIVVideo(imageKey, audioAssetId) {
-    const response = await axios.post(HEYGEN_VIDEO_URL, {
+async function createAvatarIVVideo(imageKey, audioAssetId, videoOrientation = 'portrait') {
+    // Map 'square' to a specific dimension if needed, but HeyGen might support it.
+    // For now, let's trust 'landscape' and 'portrait'. 
+    // If 'square', we might need to send specific dimensions or check API docs.
+    // Assuming 'landscape' and 'portrait' are directly supported strings for video_orientation.
+    // NOTE: 'square' might not be a valid 'video_orientation' value in HeyGen API v2.
+    // Commonly supported: 'landscape', 'portrait'.
+
+    // If it's square, let's default to portrait or dimension, but for now let's pass it if it's one of the valid ones.
+    // Safe default: 'portrait'
+
+    let orientationParam = videoOrientation;
+    let dimensionParam = undefined;
+
+    if (videoOrientation === 'square') {
+        // HeyGen might expect specific dimension for square
+        dimensionParam = { width: 1080, height: 1080 };
+        orientationParam = undefined; // Do not send video_orientation if sending dimension
+    } else if (videoOrientation === 'landscape') {
+        dimensionParam = { width: 1920, height: 1080 };
+        orientationParam = undefined;
+    } else if (videoOrientation === 'portrait') {
+        dimensionParam = { width: 1080, height: 1920 };
+        orientationParam = undefined;
+    }
+
+    const payload = {
         image_key: imageKey,
         video_title: `Video_${Date.now()}`,
         audio_asset_id: audioAssetId,
-        video_orientation: 'portrait',
         fit: 'cover'
-    }, {
+    };
+
+    if (dimensionParam) {
+        payload.dimension = dimensionParam;
+    } else {
+        payload.video_orientation = orientationParam;
+    }
+
+    const response = await axios.post(HEYGEN_VIDEO_URL, payload, {
         headers: {
             'Content-Type': 'application/json',
             'X-API-KEY': HEYGEN_API_KEY,
@@ -138,8 +172,10 @@ app.post('/api/generate-video', upload.fields([
         console.log('Step 3: Creating Avatar IV video...');
         console.log(`Using image_key: ${imageKey}`);
         console.log(`Using audio_asset_id: ${audioAssetId}`);
+        const aspectRatio = req.body.aspectRatio || 'portrait';
+        console.log(`Using aspect ratio: ${aspectRatio}`);
 
-        const videoResponse = await createAvatarIVVideo(imageKey, audioAssetId);
+        const videoResponse = await createAvatarIVVideo(imageKey, audioAssetId, aspectRatio);
         console.log('Video creation response:', JSON.stringify(videoResponse, null, 2));
 
         // Return success response
