@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fábrica de Cursos v1</title>
+    <meta name="description" content="Gere vídeos com Avatar IV usando imagem e áudio">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fábrica de Cursos</h1>
+            <p class="subtitle">Gere vídeos com Avatar IV</p>
+        </header>
+
+        <main>
+            <form id="uploadForm">
+                <div class="upload-section">
+                    <div class="upload-card" id="imageUploadCard">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+                        <h3>Imagem</h3>
+                        <p>1080 x 1920 px (JPG, PNG)</p>
+                        <input type="file" id="imageInput" accept="image/jpeg,image/png" hidden>
+                        <button type="button" class="upload-btn" onclick="document.getElementById('imageInput').click()">
+                            Selecionar Imagem
+                        </button>
+                        <span class="file-name" id="imageFileName"></span>
+                    </div>
+
+                    <div class="upload-card" id="audioUploadCard">
+                        <div class="upload-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"/>
+                                <circle cx="6" cy="18" r="3"/>
+                                <circle cx="18" cy="16" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>Áudio</h3>
+                        <p>MP3 ou WAV</p>
+                        <input type="file" id="audioInput" accept="audio/mpeg,audio/wav" hidden>
+                        <button type="button" class="upload-btn" onclick="document.getElementById('audioInput').click()">
+                            Selecionar Áudio
+                        </button>
+                        <span class="file-name" id="audioFileName"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="generate-btn" id="generateBtn" disabled>
+                    <span class="btn-text">Gerar Vídeo</span>
+                    <span class="btn-loader" hidden>
+                        <svg class="spinner" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4" stroke-dashoffset="10"/>
+                        </svg>
+                        Processando...
+                    </span>
+                </button>
+            </form>
+
+            <div class="result-section" id="resultSection" hidden>
+                <h3>Resposta da API</h3>
+                <div class="result-box" id="resultBox">
+                    <pre id="resultContent"></pre>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by HeyGen Avatar IV API</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
