@@ -1,4 +1,9 @@
-require('dotenv').config();
+const dotenvResult = require('dotenv').config();
+if (dotenvResult.error) {
+    console.error('Error loading .env file:', dotenvResult.error);
+} else {
+    console.log('.env file loaded successfully');
+}
 const express = require('express');
 const multer = require('multer');
 const axios = require('axios');

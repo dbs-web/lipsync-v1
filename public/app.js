@@ -80,6 +80,7 @@ uploadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (!imageFile || !audioFile) {
+        alert('Por favor, selecione uma imagem e um áudio antes de gerar o vídeo.');
         showResult({ error: 'Por favor, selecione uma imagem e um áudio.' }, false);
         return;
     }
@@ -132,3 +133,9 @@ function showResult(data, success) {
 function hideResult() {
     resultSection.hidden = true;
 }
+// Initial check
+window.addEventListener('load', () => {
+    // Force reset of loading state
+    setLoading(false);
+    updateButtonState();
+});
