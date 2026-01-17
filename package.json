@@ -5,7 +5,7 @@
     "main": "server.js",
     "scripts": {
         "dev": "next dev",
-        "next:build": "next build",
+        "next:build": "npx convex codegen && next build",
         "build": "npx convex deploy --cmd 'npm run next:build'",
         "start": "next start",
         "lint": "next lint",
