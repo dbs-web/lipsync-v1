@@ -2,7 +2,6 @@
     "name": "lipsync-v1",
     "version": "1.0.0",
     "description": "Lipsync v1 - Generate Avatar IV videos with HeyGen API",
-    "main": "server.js",
     "scripts": {
         "dev": "next dev",
         "next:build": "npx convex codegen && next build",
