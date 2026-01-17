@@ -79,3 +79,5 @@ Lipsync v1 is a Next.js application that integrates with the **HeyGen API** to g
 ## Webhooks
 
 The application includes a webhook handler at `/heygen/callback` (configured in `convex/http.ts`) to receive automatic status updates from HeyGen. Ensure your HeyGen payload includes this callback URL (handled automatically by `app/api/generate/route.ts`).
+
+__
