@@ -1,18 +1,35 @@
 {
-    "name": "fabrica-de-cursos-v1-landing-page",
+    "name": "lipsync-v1",
     "version": "1.0.0",
-    "description": "Landing page para gerar vídeos Avatar IV com HeyGen API",
+    "description": "Lipsync v1 - Generate Avatar IV videos with HeyGen API",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js",
-        "dev": "node server.js"
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "start:legacy": "node server.js"
     },
     "dependencies": {
         "axios": "^1.6.0",
+        "convex": "^1.31.5",
         "cors": "^2.8.5",
         "dotenv": "^16.3.1",
         "express": "^4.18.2",
         "form-data": "^4.0.0",
-        "multer": "^1.4.5-lts.1"
+        "lucide-react": "^0.300.0",
+        "multer": "^1.4.5-lts.1",
+        "next": "^14.1.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "autoprefixer": "^10.4.17",
+        "postcss": "^8.4.33",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5.3.3"
     }
 }
