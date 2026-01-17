@@ -5,7 +5,8 @@
     "main": "server.js",
     "scripts": {
         "dev": "next dev",
-        "build": "npx convex deploy --cmd 'npm run build'",
+        "next:build": "next build",
+        "build": "npx convex deploy --cmd 'npm run next:build'",
         "start": "next start",
         "lint": "next lint",
         "start:legacy": "node server.js"
